@@ -10,7 +10,7 @@ import singlyLinkedList.*
 * index, nor removal from the "tail" or insertion to the "head" of the queue, as to respect the FIFO paradigm.
 * */
 
-fun <T> enqueue(queue:ListNode<T>?, data:T?):ListNode<T>? = when(queue){
+fun <T> enqueue(queue:ListNode<T>?, data:T):ListNode<T>? = when(queue){
     null -> ListNode(data, null)
     else -> ListNode(data, queue)
 }

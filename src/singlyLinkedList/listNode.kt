@@ -1,33 +1,24 @@
 package singlyLinkedList
 
 
-/*Here is the implementation of a singly linked list node, and the basic operations of a singly linked list.*/
+/*Here is the implementation of a singly linked list node, and the basic operations of a singly linked list.
+* In another kt file, called listExercises you will find some exercises and challenges such as the palindrome verification,
+* the removal of a given key or all instances of that given key, and other implementations of that nature.
+* */
 
 
-data class ListNode<T>(val data: T?, val next:ListNode<T>?)
+data class ListNode<T>(val data: T, val next:ListNode<T>?)
 
-    fun <T> insert(list: ListNode<T>?, data: T?):ListNode<T> {
-        return if (data == null) {
-            print("why are you trying to insert null? please stop")
-             ListNode(list?.data, null)
-        }
-        else {
-            when (list?.data) {
-                null -> ListNode(data, null)
-                else -> {
-                    if (list.next == null) {
-                        ListNode(list.data, ListNode(data, null))
-                    } else {
-                        ListNode(list.data, insert(list.next, data))
-                    }
-                }
-            }
-        }
 
+    fun <T> insert(list:ListNode<T>?, data: T?):ListNode<T>? = when {
+        data == null -> list
+        list == null -> ListNode(data, null)
+        list.next == null -> ListNode(list.data, ListNode(data, null))
+        else -> ListNode(list.data, insert(list.next, data))
     }
 
 
-    fun <T> insertToHead(list: ListNode<T>?, data:T?):ListNode<T> = when (list) {
+    fun <T> insertToHead(list: ListNode<T>?, data:T):ListNode<T> = when (list) {
         null -> ListNode<T>(data, null)
         else -> { ListNode<T>(data, list) }
     }
@@ -42,8 +33,8 @@ data class ListNode<T>(val data: T?, val next:ListNode<T>?)
     }
 
 
-    fun <T> remove(list: ListNode<T>?):ListNode<T>? = when {
-        list?.data == null -> list
+    fun <T> remove(list: ListNode<T>?):ListNode<T>? = when (list?.data) {
+        null -> list
         else -> { list.next }
     }
 
@@ -59,13 +50,6 @@ data class ListNode<T>(val data: T?, val next:ListNode<T>?)
         list == null || index < 0 -> list
         index == 0 -> remove(list)
         else -> ListNode<T>(list.data, removeFromIndex(list.next, index -1))
-    }
-
-
-    fun <T> removeFirstInstance(list:ListNode<T>?, value: T):ListNode<T>? = when {
-        list == null -> null
-        list.data != value -> ListNode<T>(list.data, removeFirstInstance(list.next, value))
-        else -> list.next
     }
 
 

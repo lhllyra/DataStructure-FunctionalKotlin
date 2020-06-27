@@ -26,5 +26,5 @@ fun <T> pop(stack:ListNode<T>?):ListNode<T>? = when{ //returns whats left of the
 
 fun <T> flipStack(stack: ListNode<T>?):ListNode<T>? = when(stack){ //returns the stack flipped upsideDown
     null -> stack
-    else -> ListNode<T>(getPop(stack)?.data, flipStack(pop(stack)))
+    else -> ListNode<T>(getPop(stack)!!.data, flipStack(pop(stack)))
 }
